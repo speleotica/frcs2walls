@@ -93,6 +93,7 @@ describe(`convertToWalls`, function () {
       Path.resolve(testDir, 'test.wpj'),
       convertToWalls({
         title: 'FRCS and Surrounding Caves',
+        name: 'FRCS',
         caves: [
           {
             subdir: 'fr',
@@ -125,6 +126,7 @@ describe(`convertToWalls`, function () {
     expectDirContents(await readDirContents(testDir), {
       'test.wpj': `
         .BOOK	FRCS and Surrounding Caves
+        .NAME	FRCS
         .PATH	fr
         .STATUS	17
         .REF	0.000 0.000 14 0.000 0 0 0 0 0.000 0 0 0.000 0 "WGS1984"
@@ -169,6 +171,11 @@ describe(`convertToWalls`, function () {
           AE15	AE14	10	21.5/20	6	<5,5,0,3>
           AE14	AE13	26.8	288/286	-50	<0,7,20,5>
           AE13	AE12	20.7	236/236	34	<3,5,4,4>	;SHORT CANYON AT THE BASE OF THE SECOND DROP
+          #[
+          Multiline
+          Comment
+          Test
+          #]
           AE12	AE11	26.8	--	-90	<--,7,20,5>
         `,
         '2.srv': `
@@ -242,6 +249,7 @@ describe(`convertToWalls`, function () {
       Path.resolve(testDir, 'test.wpj'),
       convertToWalls({
         title: 'FRCS and Surrounding Caves',
+        name: 'FRCS',
         caves: [
           {
             subdir: 'fr',
@@ -278,6 +286,7 @@ describe(`convertToWalls`, function () {
     expectDirContents(await readDirContents(testDir), {
       'test.wpj': `
         .BOOK	FRCS and Surrounding Caves
+        .NAME	FRCS
         .STATUS	17
         .BOOK	Fisher Ridge Cave System
         .OPTIONS	PREFIX=fr
@@ -331,6 +340,11 @@ describe(`convertToWalls`, function () {
           AE15	AE14	10	21.5/20	6	<5,5,0,3>
           AE14	AE13	26.8	288/286	-50	<0,7,20,5>
           AE13	AE12	20.7	236/236	34	<3,5,4,4>	;SHORT CANYON AT THE BASE OF THE SECOND DROP
+          #[
+          Multiline
+          Comment
+          Test
+          #]
           AE12	AE11	26.8	--	-90	<--,7,20,5>
         `,
         'fr2.srv': `

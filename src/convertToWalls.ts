@@ -9,7 +9,7 @@ import { Angle, Length, Unitize } from '@speleotica/unitized'
 import {
   backsightAzimuthTypeOption,
   backsightInclinationTypeOption,
-  comment,
+  comment as commentLine,
   compassAndTapeShot,
   dateDirective,
   distanceUnitOption,
@@ -45,17 +45,20 @@ export type InputCave = {
 
 export default function convertToWalls({
   title,
+  name,
   caves,
 }: {
   title: string
+  name?: string
   caves: InputCave[]
 }): WallsWpjFile {
   if (caves.length === 1) {
     const root = convertCave(caves[0])
     root.title = title
+    root.name = name
     return { root }
   }
-  const root = wallsProjectBook(title)
+  const root = wallsProjectBook(title, name)
   root.reviewDistanceUnit = Length.feet
   for (const cave of caves) {
     root.children.push(convertCave(cave, { multicave: true }))
@@ -132,12 +135,12 @@ function convertTrip({
   const date = summary?.date || trip.header.date
 
   const srv: WallsSrvFile = {
-    lines: [comment(`${tripNum} ${name}`)],
+    lines: [commentLine(`${tripNum} ${name}`)],
   }
 
   if (team) {
     srv.lines.push(
-      comment(team.join(team.find((t) => /,/.test(t)) ? '; ' : ', '))
+      commentLine(team.join(team.find((t) => /,/.test(t)) ? '; ' : ', '))
     )
   }
   if (date) srv.lines.push(dateDirective(date))
@@ -237,9 +240,13 @@ function convertTrip({
           ...(kind !== FrcsShotKind.Normal && {
             targetHeight: verticalDistance?.negate?.(),
           }),
-          comment,
         }
       )
+      if (comment && /\n/m.test(comment)) {
+        srv.lines.push(commentLine(comment))
+      } else {
+        wallsShot.comment = comment
+      }
       srv.lines.push(wallsShot)
     }
   }
