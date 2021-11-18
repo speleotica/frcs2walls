@@ -1,1 +1,1 @@
-export { default as convertToWalls } from './convertToWalls'
+export { default as convertToWalls, InputCave } from './convertToWalls'

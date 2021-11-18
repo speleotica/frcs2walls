@@ -34,7 +34,7 @@ import {
   Georeference,
 } from '@speleotica/walls/wpj'
 
-type InputCave = {
+export type InputCave = {
   subdir: string
   survey: FrcsSurveyFile
   summaries?: FrcsTripSummaryFile
