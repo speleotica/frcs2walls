@@ -32,6 +32,7 @@ import {
   WallsProjectBook,
   WallsProjectSurvey,
   Georeference,
+  View,
 } from '@speleotica/walls/wpj'
 
 export type InputCave = {
@@ -41,6 +42,11 @@ export type InputCave = {
   summaries?: FrcsTripSummaryFile
   fixedStations?: FixDirective[]
   georeference?: Georeference
+}
+
+const commonOptions = {
+  reviewDistanceUnit: Length.feet,
+  defaultViewAfterCompilation: View.North,
 }
 
 export default function convertToWalls({
@@ -58,11 +64,15 @@ export default function convertToWalls({
     root.name = name
     return { root }
   }
-  const root = wallsProjectBook(title, name)
-  root.reviewDistanceUnit = Length.feet
-  for (const cave of caves) {
-    root.children.push(convertCave(cave, { multicave: true }))
-  }
+  const root = wallsProjectBook(
+    title,
+    name,
+    null,
+    caves.map((cave) => convertCave(cave, { multicave: true })),
+    {
+      ...commonOptions,
+    }
+  )
   return { root }
 }
 
@@ -78,8 +88,8 @@ function convertCave(
   { multicave }: { multicave?: boolean } = {}
 ): WallsProjectBook {
   if (namePrefix == null) namePrefix = multicave ? subdir : ''
-  const book = wallsProjectBook(survey.cave || subdir, null, subdir, [], {
-    reviewDistanceUnit: Length.feet,
+  const book = wallsProjectBook(survey.cave || subdir, namePrefix, subdir, [], {
+    ...commonOptions,
     georeference,
     ...(multicave && { options: `PREFIX=${subdir}` }),
   })

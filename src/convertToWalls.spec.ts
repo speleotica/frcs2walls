@@ -128,7 +128,7 @@ describe(`convertToWalls`, function () {
         .BOOK	FRCS and Surrounding Caves
         .NAME	FRCS
         .PATH	fr
-        .STATUS	17
+        .STATUS	1572881
         .REF	0.000 0.000 14 0.000 0 0 0 0 0.000 0 0 0.000 0 "WGS1984"
         .SURVEY	Fixed Stations
         .NAME	fix
@@ -287,11 +287,12 @@ describe(`convertToWalls`, function () {
       'test.wpj': `
         .BOOK	FRCS and Surrounding Caves
         .NAME	FRCS
-        .STATUS	17
+        .STATUS	1572881
         .BOOK	Fisher Ridge Cave System
+        .NAME	fr
         .OPTIONS	PREFIX=fr
         .PATH	fr
-        .STATUS	17
+        .STATUS	1572881
         .REF	0.000 0.000 14 0.000 0 0 0 0 0.000 0 0 0.000 0 "WGS1984"
         .SURVEY	Fixed Stations
         .NAME	frfix
@@ -316,9 +317,10 @@ describe(`convertToWalls`, function () {
         .STATUS	24
         .ENDBOOK
         .BOOK	cr
+        .NAME	cr
         .OPTIONS	PREFIX=cr
         .PATH	cr
-        .STATUS	17
+        .STATUS	1572881
         .ENDBOOK
         .ENDBOOK
       `,
