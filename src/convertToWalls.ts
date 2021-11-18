@@ -5,7 +5,7 @@ import {
   FrcsTripSummary,
   FrcsTripSummaryFile,
 } from '@speleotica/frcsdata'
-import { Length, Unitize } from '@speleotica/unitized'
+import { Angle, Length, Unitize, UnitizedNumber } from '@speleotica/unitized'
 import {
   backsightAzimuthTypeOption,
   backsightInclinationTypeOption,
@@ -160,13 +160,24 @@ function convertTrip({
       to,
       horizontalDistance,
       verticalDistance,
-      frontsightAzimuth,
       backsightAzimuth,
       frontsightInclination,
       backsightInclination,
       fromLruds,
       toLruds,
+      comment,
     } = shot
+    let { frontsightAzimuth } = shot
+    if (
+      frontsightAzimuth == null &&
+      backsightAzimuth == null &&
+      ((frontsightInclination != null &&
+        frontsightInclination.abs().get(Angle.degrees) !== 90) ||
+        (backsightInclination != null &&
+          backsightInclination.abs().get(Angle.degrees) !== 90))
+    ) {
+      frontsightAzimuth = Unitize.degrees(0)
+    }
     if (kind === FrcsShotKind.Horizontal) {
       if (!horizontalDistance) {
         throw new Error(
@@ -208,6 +219,7 @@ function convertTrip({
           ...(kind !== FrcsShotKind.Normal && {
             targetHeight: verticalDistance?.negate?.(),
           }),
+          comment,
         }
       )
       srv.lines.push(wallsShot)

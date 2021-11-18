@@ -161,14 +161,14 @@ describe(`convertToWalls`, function () {
           #DATE	1981-02-15
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2
           AE20	<1,3,0,2>
-          AE20	AE19	9.3	60/60	-36	<2,12,0,20>
+          AE20	AE19	9.3	60/60	-36	<2,12,0,20>	;AE20     0        0        0        Bug-can't put before so put after-so can't make 2 fixed 10/28/12
           AE19	AE18	24.5	0/0	-90	<6,10,25,0>
           AE18	AE17	8	350.5/350.5	17	<3,5,0,0>
           AE17	AE16	6.7	0/0	-90	<3,5,6,1>
           AE16	AE15	12.6	70.5/71	-18	<4,0,2,1>
           AE15	AE14	10	21.5/20	6	<5,5,0,3>
           AE14	AE13	26.8	288/286	-50	<0,7,20,5>
-          AE13	AE12	20.7	236/236	34	<3,5,4,4>
+          AE13	AE12	20.7	236/236	34	<3,5,4,4>	;SHORT CANYON AT THE BASE OF THE SECOND DROP
           AE12	AE11	26.8	--	-90	<--,7,20,5>
         `,
         '2.srv': `
@@ -196,7 +196,7 @@ describe(`convertToWalls`, function () {
           ;PETER QUICK, CHIP HOPPER
           #DATE	1983-03-05
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2 TYPEVB=C,2
-          Q19	QAP1	25	49.5/49.5	-12/-11	<3,3,1,7>
+          Q19	QAP1	25	49.5/49.5	-12/-11	<3,3,1,7>	;Quap Passage short cut from the Hunky-Dory access crawl.
           QAP1	QAP2	27.2	100.5/100	2.5/2.5	<2,3,0,10>
           QAP2	QAP3	14.8	39.5/39.5	-11/-10.5	<1,4,1,12>
           QAP3	QAP4	21.1	355/354	2/2.5	<4,4,2,12>
@@ -213,6 +213,7 @@ describe(`convertToWalls`, function () {
           B29	B30	29.5	320/321	0	--	-0.5	<2,3,4,2>
           B30	B31	13.7	0/0	40	<2,4,6,9>
           B30	B30sp	13.7	0/0	40	<2,4,6,-->
+          B32	B33	0	0	-1	<6,7,8,9>
         `,
         '6.srv': `
           ;6 CONTINUATION OF E SURVEY TO WEST ROOM

@@ -60,6 +60,7 @@ FT C  DD
   B30  B29  29.5H  320.0 321.0  0.5       2  3  4  2
   B31  B30  13.7   360.0 360.0 40.0       2  4  6  9
 B30sp  B30  13.7 s 360.0 360.0 40.0       2  4  6  
+  B33  B32     0               -1.0       6  7  8  9
  *
 CONTINUATION OF E SURVEY TO WEST ROOM
 KEITH ORTIZ  CHIP HOPPER   4-6-81
