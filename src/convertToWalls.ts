@@ -5,7 +5,7 @@ import {
   FrcsTripSummary,
   FrcsTripSummaryFile,
 } from '@speleotica/frcsdata'
-import { Angle, Length, Unitize, UnitizedNumber } from '@speleotica/unitized'
+import { Angle, Length, Unitize } from '@speleotica/unitized'
 import {
   backsightAzimuthTypeOption,
   backsightInclinationTypeOption,
@@ -36,6 +36,7 @@ import {
 
 export type InputCave = {
   subdir: string
+  namePrefix?: string
   survey: FrcsSurveyFile
   summaries?: FrcsTripSummaryFile
   fixedStations?: FixDirective[]
@@ -57,23 +58,31 @@ export default function convertToWalls({
   const root = wallsProjectBook(title)
   root.reviewDistanceUnit = Length.feet
   for (const cave of caves) {
-    root.children.push(convertCave(cave, { usePrefix: true }))
+    root.children.push(convertCave(cave, { multicave: true }))
   }
   return { root }
 }
 
 function convertCave(
-  { subdir, survey, summaries, fixedStations, georeference }: InputCave,
-  { usePrefix }: { usePrefix?: boolean } = {}
+  {
+    subdir,
+    namePrefix,
+    survey,
+    summaries,
+    fixedStations,
+    georeference,
+  }: InputCave,
+  { multicave }: { multicave?: boolean } = {}
 ): WallsProjectBook {
+  if (namePrefix == null) namePrefix = multicave ? subdir : ''
   const book = wallsProjectBook(survey.cave || subdir, null, subdir, [], {
     reviewDistanceUnit: Length.feet,
     georeference,
-    ...(usePrefix && { options: `PREFIX=${subdir}` }),
+    ...(multicave && { options: `PREFIX=${subdir}` }),
   })
   if (fixedStations) {
     book.children.push(
-      wallsProjectSurvey('Fixed Stations', 'fix', null, {
+      wallsProjectSurvey('Fixed Stations', `${namePrefix}fix`, null, {
         content: {
           lines: fixedStations,
         },
@@ -84,7 +93,14 @@ function convertCave(
     const trip = survey.trips[tripIndex]
     if (trip == null) continue
     const summary = summaries?.tripSummaries[tripIndex]
-    book.children.push(convertTrip({ tripIndex, trip, summary }))
+    book.children.push(
+      convertTrip({
+        tripIndex,
+        trip,
+        summary,
+        namePrefix,
+      })
+    )
   }
   return book
 }
@@ -93,10 +109,12 @@ function convertTrip({
   tripIndex,
   trip,
   summary,
+  namePrefix,
 }: {
   tripIndex: number
   trip: FrcsTrip
   summary?: FrcsTripSummary
+  namePrefix: string
 }): WallsProjectSurvey {
   const tripNum = summary?.tripNumber ?? tripIndex + 1
   const {
@@ -225,9 +243,14 @@ function convertTrip({
       srv.lines.push(wallsShot)
     }
   }
-  return wallsProjectSurvey(`${tripNum} ${name}`, String(tripNum), null, {
-    content: srv,
-    nameDefinesSegment: true,
-    reviewDistanceUnit: Length.feet,
-  })
+  return wallsProjectSurvey(
+    `${tripNum} ${name}`,
+    `${namePrefix}${tripNum}`,
+    null,
+    {
+      content: srv,
+      nameDefinesSegment: true,
+      reviewDistanceUnit: Length.feet,
+    }
+  )
 }
