@@ -1,0 +1,72 @@
+      Fisher Ridge Cave System, Hart Co., KY
+ENTRANCE DROPS, JOE'S "I LOVE MY WIFE TRAVERSE", TRICKY TRAVERSE
+PETER QUICK, KEITH ORTIZ   -  2-15-81
+This File has Crumps test connected.  11/20/12
+ *
+FT C  DD    A
+      AE20     0                          1  3  0  2
+*      %FS
+*     AE20     0        0        0        Bug-can't put before so put after-so can't make 2 fixed 10/28/12
+ AE19 AE20   9.3    60.0  60.0-36.0       2 12  0 20
+ AE18 AE19  24.5     0.0   0.0-90.0       6 10 25  0
+ AE17 AE18   8.0   350.5 350.5 17.0       3  5  0  0
+ AE16 AE17   6.7     0.0   0.0-90.0       3  5  6  1
+ AE15 AE16  12.6    70.5  71.0-18.0       4  0  2  1
+ AE14 AE15  10.0    21.5  20.0  6.0       5  5  0  3
+ AE13 AE14  26.8   288.0 286.0-50.0       0  7 20  5
+*
+*SHORT CANYON AT THE BASE OF THE SECOND DROP
+ AE12 AE13  20.7   236.0 236.0 34.0       3  5  4  4
+ AE11 AE12  26.8              -90.0          7 20  5
+ *
+TRICKY TRAVERSE AND THEN FIRST SURVEY IN UPPER CROWLWAY
+DAN CROWL, KEITH ORTIZ, CHIP HOPPER, PETER QUICK, LARRY BEAN    14 FEB 1981
+ *
+FI B  DD
+   A2   A1  48 10  292.0 110.0-42.0       5 10 35  5    A1 2 7 3 4.5
+   A3   A2  12  5  333.5 153.5 35.0       3  1 15  5
+   A4   A3   4  2    0.0   0.0 90.0       3  1 10 10
+ *
+CONNECT UPPER HILTON TO FISHER AVE AND SURVEY IN PRESSURE PASSAGE.
+J.SAUNDERS,NANCY COLTER,TOM JOHENGEN,C SANTERRE,LINDA JAGGER - 5/16/82
+ML IN ORIGINAL SURVEY NOTES CHANGED TO ML$ TO AVOID CONFLICT
+WITH COON CANYON CONTINUATION SURVEY USING ML.
+ *
+FT BB DD
+ ML$1   J6  50.0   124.0 303.5 11.0-11.0 12 12 35 15
+ ML$2 ML$1  32.0   157.0 337.0 53.0-53.0 30  2 16  5
+ ML$3 ML$2  25.1   142.5 324.0 -5.0  5.0  0  4  5  7
+ ML$4 ML$3   6.0              -90.0 90.0  0  4 11  1
+ *
+Hunky-Dory Mopup:  Q19-PD7 loop (Quap Passage), Q1 Side Lead, Others.
+PETER QUICK, CHIP HOPPER.  3/5/83
+ *
+FT CC DD
+*
+*Quap Passage short cut from the Hunky-Dory access crawl.
+ QAP1  Q19  25.0    49.5  49.5-12.0-11.0  3  3  1  7
+ QAP2 QAP1  27.2   100.5 100.0  2.5  2.5  2  3  0 10
+ QAP3 QAP2  14.8    39.5  39.5-11.0-10.5  1  4  1 12
+ QAP4 QAP3  21.1   355.0 354.0  2.0  2.5  4  4  2 12
+ QAP5 QAP4  43.6   343.0 341.5 -5.0 -4.5  2  7  5 12
+ QAP6 QAP5  23.0    39.5  39.0  9.0  9.5  3  4  0 15
+ QAP7 QAP6  35.1    11.5  11.0  0.5  1.0  3  6  1 25
+ QAP8 QAP7   5.8              -90.0-90.0  2  4  6 20
+ *
+DOUG'S DEMISE (50 FT DROP), CHRIS CROSS, CRAWL ABOVE DROP
+PETER QUICK, CHRIS GERACE, PHIL ODEN, CHIP HOPPER - 3-6-81
+ *
+FT C  DD
+  B30  B29  29.5H  320.0 321.0  0.5       2  3  4  2
+  B31  B30  13.7   360.0 360.0 40.0       2  4  6  9
+B30sp  B30  13.7 s 360.0 360.0 40.0       2  4  6  
+ *
+CONTINUATION OF E SURVEY TO WEST ROOM
+KEITH ORTIZ  CHIP HOPPER   4-6-81
+ *
+FT C  DD
+  E37  E36  31.6D  231.0 232.0  2.0       3 10 20 32
+  E38  E37  19.2D  258.5 259.0 -1.0      10  5 20 30
+  E39  E38  36.5H  227.0 228.0 -1.0      10  4 12 30
+  E40  E39  27.0     0.0   0.0-90.0      10  4 29  3
+  E41  E40  18.5D  260.0 261.5  2.2       3  3 15  3

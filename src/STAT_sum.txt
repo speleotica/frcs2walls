@@ -1,0 +1,28 @@
+Survey trip summary as of  1/28/2019 
+
+  2   2/14/1981  1133.75   55  TRICKY TRAVERSE AND THEN FIRST SURVEY IN UPPER CROWLWAY                         EXCLUDED:   0.00  0
+                               Dan Crowl  Keith Ortiz  Chip Hopper  Peter Quick  Larry Bean  
+                                 A1-A56       
+
+  1   2/15/1981   258.60   17  ENTRANCE DROPS, JOE'S "I LOVE MY WIFE TRAVERSE", TRICKY TRAVERSE                EXCLUDED:   0.00  0
+                               Peter Quick  Keith Ortiz  
+                                 A1           AD1-AD3      AE1          AE1 SIDE     
+                                 AE9 SIDE     AE10-AE9     AE13 SIDE    AE15 SIDE    
+                                 AE20-AE11    
+
+  5   3/06/1981  2371.20   61  DOUG'S DEMISE (50 FT DROP), CHRIS CROSS, CRAWL ABOVE DROP                       EXCLUDED:   0.00  0
+                               Peter Quick  Chris Gerace  Phil Oden  Chip Hopper  
+                                 A13 SIDE     B1-B5        B2 SIDE      B3 SIDE      
+                                 B6-B18       B17 SIDE     B19-B38      B32 SIDE     
+                                 BS1-BS5      C1-C18       
+
+  3   5/16/1982   264.40   13  CONNECT UPPER HILTON TO FISHER AVE AND SURVEY IN PRESSURE PASSAGE.              EXCLUDED:   0.00  0
+                               Joe W. Saunders  Nancy Colter  Tom Johengen  Charles Santerre  Linda Jagger  
+                                 DP21 SIDE    DQ1-DQ5      J6 SIDE      ML$1-ML$7    
+                                 ML$7 SIDE    MF13 LOOP                                      
+
+  4   3/05/1983   844.50   35  Hunky-Dory Mopup:  Q19-PD7 loop (Quap Passage), Q1 Side Lead, Others.           EXCLUDED: 103.70  4
+                               Peter Quick  Chip Hopper  
+                                 Q1 SIDE      Q9 SIDE      Q19 SIDE     QAP1-QAP16   
+                                 QAP16 SIDE   PD7 LOOP     QF1-QF6      QF6 SIDE     
+                                 Q3 LOOP      QG1-QG11     
