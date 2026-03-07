@@ -104,6 +104,7 @@ function convertCave(
   }
   for (let tripIndex = 0; tripIndex < survey.trips.length; tripIndex++) {
     const trip = survey.trips[tripIndex]
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (trip == null) continue
     const summary = summaries?.tripSummaries[tripIndex]
     book.children.push(
@@ -219,9 +220,9 @@ function convertTrip({
     }
 
     const tapingMethod =
-      kind === FrcsShotKind.Diagonal
-        ? TapingMethod.InstrumentToStation
-        : TapingMethod.InstrumentToTarget
+      kind === FrcsShotKind.Diagonal ?
+        TapingMethod.InstrumentToStation
+      : TapingMethod.InstrumentToTarget
     if (tapingMethod !== lastTapingMethod) {
       srv.lines.push(unitsDirective([tapingMethodOption(tapingMethod)]))
       lastTapingMethod = tapingMethod
@@ -235,20 +236,19 @@ function convertTrip({
         from,
         to,
         distance,
-        backsightAzimuth
-          ? [frontsightAzimuth, backsightAzimuth]
-          : frontsightAzimuth,
-        kind === FrcsShotKind.Normal
-          ? backsightInclination
-            ? [frontsightInclination, backsightInclination]
-            : frontsightInclination
-          : Unitize.degrees(0),
-        toLruds
-          ? [toLruds.left, toLruds.right, toLruds.up, toLruds.down]
-          : undefined,
+        backsightAzimuth ?
+          [frontsightAzimuth, backsightAzimuth]
+        : frontsightAzimuth,
+        kind === FrcsShotKind.Normal ?
+          backsightInclination ? [frontsightInclination, backsightInclination]
+          : frontsightInclination
+        : Unitize.degrees(0),
+        toLruds ?
+          [toLruds.left, toLruds.right, toLruds.up, toLruds.down]
+        : undefined,
         {
           ...(kind !== FrcsShotKind.Normal && {
-            targetHeight: verticalDistance?.negate?.(),
+            targetHeight: verticalDistance?.negate(),
           }),
         }
       )

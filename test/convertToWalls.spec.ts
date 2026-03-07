@@ -5,7 +5,7 @@ import {
   parseFrcsTripSummaryFile,
 } from '@speleotica/frcsdata/node'
 import { writeWallsProject } from '@speleotica/walls/node'
-import { convertToWalls } from '.'
+import { convertToWalls } from '../src/index'
 import dedent from 'dedent-js'
 import fs from 'fs-extra'
 import Path from 'path'
@@ -13,6 +13,8 @@ import iconv from 'iconv-lite'
 import { fixDirective } from '@speleotica/walls/srv/WallsSrvFile'
 import { Unitize } from '@speleotica/unitized'
 import { DisplayLatLongFormat } from '@speleotica/walls/wpj'
+import { dirname } from './dirname'
+import path from 'path'
 
 type DirContents = { [entry: string]: string | DirContents }
 
@@ -52,7 +54,6 @@ describe(`convertToWalls`, function () {
           throw new Error(`expected ${subpath} to be a directory`)
         }
         expect(actualEntry, `contents of ${subpath}`).to.equal(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           dedent([expectedEntry] as any).replace(/\n/gm, '\r\n') + '\r\n'
         )
       } else {
@@ -66,10 +67,10 @@ describe(`convertToWalls`, function () {
 
   beforeEach(async function () {
     testDir = Path.resolve(
-      __dirname,
+      dirname,
       '..',
       'test',
-      this.currentTest?.fullTitle?.() || ''
+      this.currentTest?.fullTitle() || ''
     )
     await fs.remove(testDir).catch(() => {
       /* no-op */
@@ -84,9 +85,9 @@ describe(`convertToWalls`, function () {
     }
   })
   it(`basic test`, async function () {
-    const survey = await parseFrcsSurveyFile(require.resolve('./cdata.fr'))
+    const survey = await parseFrcsSurveyFile(path.join(dirname, './cdata.fr'))
     const summaries = await parseFrcsTripSummaryFile(
-      require.resolve('./STAT_sum.txt')
+      path.join(dirname, './STAT_sum.txt')
     )
 
     await writeWallsProject(
@@ -240,9 +241,9 @@ describe(`convertToWalls`, function () {
     })
   })
   it(`multicave mode`, async function () {
-    const survey = await parseFrcsSurveyFile(require.resolve('./cdata.fr'))
+    const survey = await parseFrcsSurveyFile(path.join(dirname, './cdata.fr'))
     const summaries = await parseFrcsTripSummaryFile(
-      require.resolve('./STAT_sum.txt')
+      path.join(dirname, './STAT_sum.txt')
     )
 
     await writeWallsProject(
