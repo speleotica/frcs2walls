@@ -12,8 +12,8 @@ importers:
         specifier: ^7.26.0
         version: 7.28.6
       '@speleotica/frcsdata':
-        specifier: ^5.0.0-beta.1
-        version: 5.0.0-beta.1(@babel/core@7.29.0)
+        specifier: ^5.0.0
+        version: 5.0.0(@babel/core@7.29.0)
       '@speleotica/unitized':
         specifier: ^2.0.0
         version: 2.0.0(@babel/core@7.29.0)
@@ -780,6 +780,10 @@ packages:
     resolution: {integrity: sha512-+xXK36fgRMXJ5uRfhRPePFgeU9o40BKZbkXANsSWYeDZjJL1pOotRzT6hVaGzJ/G29u4IDE7hgv0dOxdSU73+g==}
     hasBin: true
 
+  '@jcoreio/utils@0.0.0-development':
+    resolution: {integrity: sha512-1M7Rmg4Cl6KyHTbegdkNYS5rJgYImwNF36ew01H5xHT1Wvbb/w6Q/jDtqMYDABICR0RysSuhEg5EbmIY2Cx7tA==}
+    engines: {node: '>=16'}
+
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
 
@@ -802,8 +806,8 @@ packages:
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     resolution: {integrity: sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg==}
 
-  '@speleotica/frcsdata@5.0.0-beta.1':
-    resolution: {integrity: sha512-BpNfBJTtCJ94Ocqt/hKHJOT3olEybZk9aVmZ4ZZDlX0zvPgftIkHh1t78FgUxgl43theSqCRf2jHTPwsxsezWA==}
+  '@speleotica/frcsdata@5.0.0':
+    resolution: {integrity: sha512-ynbhnti3ILgx/bRCykrPWwTsLS6pfoBt3G5j7gCYgDbUo/J7HDaroHDUKsxmY9l2qHvuSamgFPhidKKpgX3rLA==}
     engines: {node: '>=16'}
 
   '@speleotica/unitized@2.0.0':
@@ -3295,6 +3299,8 @@ snapshots:
       - jiti
       - supports-color
 
+  '@jcoreio/utils@0.0.0-development': {}
+
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -3321,9 +3327,10 @@ snapshots:
     dependencies:
       eslint-scope: 5.1.1
 
-  '@speleotica/frcsdata@5.0.0-beta.1(@babel/core@7.29.0)':
+  '@speleotica/frcsdata@5.0.0(@babel/core@7.29.0)':
     dependencies:
       '@babel/runtime': 7.28.6
+      '@jcoreio/utils': 0.0.0-development
       '@speleotica/unitized': 2.0.0(@babel/core@7.29.0)
       chalk: 4.1.2
       dedent-js: 1.0.1

@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
-    "@speleotica/frcsdata": "^5.0.0-beta.1",
+    "@speleotica/frcsdata": "^5.0.0",
     "@speleotica/unitized": "^2.0.0",
     "@speleotica/walls": "^1.4.0",
     "i": "^0.3.7",

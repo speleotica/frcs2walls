@@ -194,7 +194,7 @@ describe(`convertToWalls`, function () {
         `,
         '3.srv': `
           ;3 CONNECT UPPER HILTON TO FISHER AVE AND SURVEY IN PRESSURE PASSAGE.
-          ;J.saunders, Nancy Colter, Tom Johengen, C Santerre, Linda Jagger
+          ;J.Saunders, Nancy Colter, Tom Johengen, C Santerre, Linda Jagger
           #DATE	1982-05-16
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=N,2 TYPEVB=N,2
           J6	ML$1	50	124/303.5	11/-11	<12,12,35,15>
@@ -228,7 +228,7 @@ describe(`convertToWalls`, function () {
         `,
         '6.srv': `
           ;6 CONTINUATION OF E SURVEY TO WEST ROOM
-          ;Keith Ortiz  Chip Hopper
+          ;Keith Ortiz, Chip Hopper
           #DATE	1981-04-06
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2
           #UNITS TAPE=IS
@@ -368,7 +368,7 @@ describe(`convertToWalls`, function () {
         `,
         'fr3.srv': `
           ;3 CONNECT UPPER HILTON TO FISHER AVE AND SURVEY IN PRESSURE PASSAGE.
-          ;J.saunders, Nancy Colter, Tom Johengen, C Santerre, Linda Jagger
+          ;J.Saunders, Nancy Colter, Tom Johengen, C Santerre, Linda Jagger
           #DATE	1982-05-16
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=N,2 TYPEVB=N,2
           J6	ML$1	50	124/303.5	11/-11	<12,12,35,15>
@@ -402,7 +402,7 @@ describe(`convertToWalls`, function () {
         `,
         'fr6.srv': `
           ;6 CONTINUATION OF E SURVEY TO WEST ROOM
-          ;Keith Ortiz  Chip Hopper
+          ;Keith Ortiz, Chip Hopper
           #DATE	1981-04-06
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2
           #UNITS TAPE=IS
