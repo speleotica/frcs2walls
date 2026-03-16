@@ -1,5 +1,4 @@
 import {
-  FrcsShotKind,
   FrcsSurveyFile,
   FrcsTrip,
   FrcsTripSummary,
@@ -104,6 +103,7 @@ function convertCave(
   }
   for (let tripIndex = 0; tripIndex < survey.trips.length; tripIndex++) {
     const trip = survey.trips[tripIndex]
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (trip == null) continue
     const summary = summaries?.tripSummaries[tripIndex]
     book.children.push(
@@ -131,16 +131,18 @@ function convertTrip({
 }): WallsProjectSurvey {
   const tripNum = summary?.tripNumber ?? tripIndex + 1
   const {
-    name,
-    azimuthUnit,
-    inclinationUnit,
-    backsightAzimuthCorrected,
-    backsightInclinationCorrected,
-    hasBacksightAzimuth,
-    hasBacksightInclination,
-  } = trip.header
+    header: { name },
+    units: {
+      azimuthUnit,
+      inclinationUnit,
+      backsightAzimuthCorrected,
+      backsightInclinationCorrected,
+      hasBacksightAzimuth,
+      hasBacksightInclination,
+    },
+  } = trip
   const team = trip.header.team || summary?.team
-  let { distanceUnit } = trip.header
+  let { distanceUnit } = trip.units
   if (distanceUnit === Length.inches) distanceUnit = Length.feet
   const date = summary?.date || trip.header.date
 
@@ -186,7 +188,7 @@ function convertTrip({
   for (const shot of trip.shots) {
     let { distance } = shot
     const {
-      kind,
+      specialKind,
       from,
       to,
       horizontalDistance,
@@ -209,7 +211,7 @@ function convertTrip({
     ) {
       frontsightAzimuth = Unitize.degrees(0)
     }
-    if (kind === FrcsShotKind.Horizontal) {
+    if (specialKind === 'horizontal') {
       if (!horizontalDistance) {
         throw new Error(
           `horizontalDistance must be provided when kind is horizontal`
@@ -219,9 +221,9 @@ function convertTrip({
     }
 
     const tapingMethod =
-      kind === FrcsShotKind.Diagonal
-        ? TapingMethod.InstrumentToStation
-        : TapingMethod.InstrumentToTarget
+      specialKind === 'diagonal' ?
+        TapingMethod.InstrumentToStation
+      : TapingMethod.InstrumentToTarget
     if (tapingMethod !== lastTapingMethod) {
       srv.lines.push(unitsDirective([tapingMethodOption(tapingMethod)]))
       lastTapingMethod = tapingMethod
@@ -235,20 +237,19 @@ function convertTrip({
         from,
         to,
         distance,
-        backsightAzimuth
-          ? [frontsightAzimuth, backsightAzimuth]
-          : frontsightAzimuth,
-        kind === FrcsShotKind.Normal
-          ? backsightInclination
-            ? [frontsightInclination, backsightInclination]
-            : frontsightInclination
-          : Unitize.degrees(0),
-        toLruds
-          ? [toLruds.left, toLruds.right, toLruds.up, toLruds.down]
-          : undefined,
+        backsightAzimuth ?
+          [frontsightAzimuth, backsightAzimuth]
+        : frontsightAzimuth,
+        !specialKind ?
+          backsightInclination ? [frontsightInclination, backsightInclination]
+          : frontsightInclination
+        : Unitize.degrees(0),
+        toLruds ?
+          [toLruds.left, toLruds.right, toLruds.up, toLruds.down]
+        : undefined,
         {
-          ...(kind !== FrcsShotKind.Normal && {
-            targetHeight: verticalDistance?.negate?.(),
+          ...(specialKind && {
+            targetHeight: verticalDistance?.negate(),
           }),
         }
       )

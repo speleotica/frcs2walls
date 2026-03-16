@@ -5,7 +5,7 @@ import {
   parseFrcsTripSummaryFile,
 } from '@speleotica/frcsdata/node'
 import { writeWallsProject } from '@speleotica/walls/node'
-import { convertToWalls } from '.'
+import { convertToWalls } from '../src/index'
 import dedent from 'dedent-js'
 import fs from 'fs-extra'
 import Path from 'path'
@@ -13,6 +13,8 @@ import iconv from 'iconv-lite'
 import { fixDirective } from '@speleotica/walls/srv/WallsSrvFile'
 import { Unitize } from '@speleotica/unitized'
 import { DisplayLatLongFormat } from '@speleotica/walls/wpj'
+import { dirname } from './dirname'
+import path from 'path'
 
 type DirContents = { [entry: string]: string | DirContents }
 
@@ -52,7 +54,6 @@ describe(`convertToWalls`, function () {
           throw new Error(`expected ${subpath} to be a directory`)
         }
         expect(actualEntry, `contents of ${subpath}`).to.equal(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           dedent([expectedEntry] as any).replace(/\n/gm, '\r\n') + '\r\n'
         )
       } else {
@@ -66,10 +67,10 @@ describe(`convertToWalls`, function () {
 
   beforeEach(async function () {
     testDir = Path.resolve(
-      __dirname,
+      dirname,
       '..',
       'test',
-      this.currentTest?.fullTitle?.() || ''
+      this.currentTest?.fullTitle() || ''
     )
     await fs.remove(testDir).catch(() => {
       /* no-op */
@@ -84,9 +85,12 @@ describe(`convertToWalls`, function () {
     }
   })
   it(`basic test`, async function () {
-    const survey = await parseFrcsSurveyFile(require.resolve('./cdata.fr'))
+    const survey = await parseFrcsSurveyFile(path.join(dirname, './cdata.fr'))
+    if ('INVALID' in survey) {
+      throw new Error('survey is invalid')
+    }
     const summaries = await parseFrcsTripSummaryFile(
-      require.resolve('./STAT_sum.txt')
+      path.join(dirname, './STAT_sum.txt')
     )
 
     await writeWallsProject(
@@ -190,7 +194,7 @@ describe(`convertToWalls`, function () {
         `,
         '3.srv': `
           ;3 CONNECT UPPER HILTON TO FISHER AVE AND SURVEY IN PRESSURE PASSAGE.
-          ;J.SAUNDERS, NANCY COLTER, TOM JOHENGEN, C SANTERRE, LINDA JAGGER
+          ;J.Saunders, Nancy Colter, Tom Johengen, C Santerre, Linda Jagger
           #DATE	1982-05-16
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=N,2 TYPEVB=N,2
           J6	ML$1	50	124/303.5	11/-11	<12,12,35,15>
@@ -200,7 +204,7 @@ describe(`convertToWalls`, function () {
         `,
         '4.srv': `
           ;4 Hunky-Dory Mopup:  Q19-PD7 loop (Quap Passage), Q1 Side Lead, Others.
-          ;PETER QUICK, CHIP HOPPER
+          ;Peter Quick, Chip Hopper
           #DATE	1983-03-05
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2 TYPEVB=C,2
           Q19	QAP1	25	49.5/49.5	-12/-11	<3,3,1,7>	;Quap Passage short cut from the Hunky-Dory access crawl.
@@ -214,7 +218,7 @@ describe(`convertToWalls`, function () {
         `,
         '5.srv': `
           ;5 DOUG'S DEMISE (50 FT DROP), CHRIS CROSS, CRAWL ABOVE DROP
-          ;PETER QUICK, CHIP HOPPER
+          ;Peter Quick, Chris Gerace, Phil Oden, Chip Hopper
           #DATE	1981-03-06
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2
           B29	B30	29.5	320/321	0	--	-0.5	<2,3,4,2>
@@ -224,8 +228,8 @@ describe(`convertToWalls`, function () {
         `,
         '6.srv': `
           ;6 CONTINUATION OF E SURVEY TO WEST ROOM
-          ;PETER QUICK, CHIP HOPPER
-          #DATE	1983-03-05
+          ;Keith Ortiz, Chip Hopper
+          #DATE	1981-04-06
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2
           #UNITS TAPE=IS
           E36	E37	31.6	231/232	0	--	-2	<3,10,20,32>
@@ -240,9 +244,12 @@ describe(`convertToWalls`, function () {
     })
   })
   it(`multicave mode`, async function () {
-    const survey = await parseFrcsSurveyFile(require.resolve('./cdata.fr'))
+    const survey = await parseFrcsSurveyFile(path.join(dirname, './cdata.fr'))
+    if ('INVALID' in survey) {
+      throw new Error('survey is invalid')
+    }
     const summaries = await parseFrcsTripSummaryFile(
-      require.resolve('./STAT_sum.txt')
+      path.join(dirname, './STAT_sum.txt')
     )
 
     await writeWallsProject(
@@ -361,7 +368,7 @@ describe(`convertToWalls`, function () {
         `,
         'fr3.srv': `
           ;3 CONNECT UPPER HILTON TO FISHER AVE AND SURVEY IN PRESSURE PASSAGE.
-          ;J.SAUNDERS, NANCY COLTER, TOM JOHENGEN, C SANTERRE, LINDA JAGGER
+          ;J.Saunders, Nancy Colter, Tom Johengen, C Santerre, Linda Jagger
           #DATE	1982-05-16
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=N,2 TYPEVB=N,2
           J6	ML$1	50	124/303.5	11/-11	<12,12,35,15>
@@ -371,7 +378,7 @@ describe(`convertToWalls`, function () {
         `,
         'fr4.srv': `
           ;4 Hunky-Dory Mopup:  Q19-PD7 loop (Quap Passage), Q1 Side Lead, Others.
-          ;PETER QUICK, CHIP HOPPER
+          ;Peter Quick, Chip Hopper
           #DATE	1983-03-05
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2 TYPEVB=C,2
           Q19	QAP1	25	49.5/49.5	-12/-11	<3,3,1,7>	;Quap Passage short cut from the Hunky-Dory access crawl.
@@ -385,7 +392,7 @@ describe(`convertToWalls`, function () {
         `,
         'fr5.srv': `
           ;5 DOUG'S DEMISE (50 FT DROP), CHRIS CROSS, CRAWL ABOVE DROP
-          ;PETER QUICK, CHIP HOPPER
+          ;Peter Quick, Chris Gerace, Phil Oden, Chip Hopper
           #DATE	1981-03-06
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2
           B29	B30	29.5	320/321	0	--	-0.5	<2,3,4,2>
@@ -395,8 +402,8 @@ describe(`convertToWalls`, function () {
         `,
         'fr6.srv': `
           ;6 CONTINUATION OF E SURVEY TO WEST ROOM
-          ;PETER QUICK, CHIP HOPPER
-          #DATE	1983-03-05
+          ;Keith Ortiz, Chip Hopper
+          #DATE	1981-04-06
           #UNITS Feet A=Degrees V=Degrees LRUD=TB TYPEAB=C,2
           #UNITS TAPE=IS
           E36	E37	31.6	231/232	0	--	-2	<3,10,20,32>
